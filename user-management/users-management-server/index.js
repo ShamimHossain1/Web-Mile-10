@@ -2,23 +2,42 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 app.use(cors());
 app.use(express.json());
 
-const userList = 
-   [
-      { id: 1, name: "John Doe", email: "johndoe@example.com", age: 30 },
-      { id: 2, name: "Jane Smith", email: "janesmith@example.com", age: 25 },
-      { id: 3, name: "Alice Johnson", email: "alicejohnson@example.com", age: 28 },
-      { id: 4, name: "Bob Brown", email: "bobbrown@example.com", age: 35 },
-      { id: 5, name: "Charlie Davis", email: "charliedavis@example.com", age: 40 },
-      { id: 6, name: "Emily White", email: "emilywhite@example.com", age: 22 },
-      { id: 7, name: "Frank Harris", email: "frankharris@example.com", age: 33 },
-      { id: 8, name: "Grace Lewis", email: "gracelewis@example.com", age: 27 },
-      { id: 9, name: "Henry Clark", email: "henryclark@example.com", age: 29 },
-      { id: 10, name: "Ivy Walker", email: "ivywalker@example.com", age: 31 }
-    ];
+
+//////////////////  Database  MongoDB    //////////////
+
+const uri = "mongodb+srv://user-management:EEiqpqrxfXeAPJY7@cluster0.0hyfk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    // await client.close();
+  }
+}
+run().catch(console.dir);
+
+
+/////////////////  Back end APIs  /////////////////
+
 
 app.get('/',(req, res)=>{
     res.send('Server is running')
