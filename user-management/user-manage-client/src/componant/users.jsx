@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const Users = () => {
 
@@ -32,12 +33,17 @@ const Users = () => {
         <div>
             {
                 users.map(user => (
-                    <div className='border-2 border-solid m-5 p-5' key={user._id}>
+                    <div className='border-2 border-solid m-5 p-5 flex justify-between' key={user._id}>
                         <h3>User ID: {user._id}</h3>
                         <h2>{user.name}</h2>
                         <p>Email: {user.email}</p>
                         <p>Age: {user.age}</p>
-                        <button onClick={() => handleDeleteUser(user._id)}>X</button>
+                        <Link to={`/update/${user._id}`}>
+                        <button>
+                            Update
+                        </button>
+                        </Link>
+                        <button  onClick={() => handleDeleteUser(user._id)}>X</button>
                     </div>
                 ))
             }

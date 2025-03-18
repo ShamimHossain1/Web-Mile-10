@@ -20,9 +20,9 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.insertedId) {
-          alert('User added successfully');
-        }
+        // if (data.insertedId) {
+        //   alert('User added successfully');
+        // }
         e.target.reset();
       })
   };
