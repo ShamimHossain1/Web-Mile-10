@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, setCoffee, coffees }) => {
     const { _id, name, chef, photo } = coffee;
 
     const handleDelete = id => {
@@ -25,9 +25,11 @@ const CoffeeCard = ({ coffee }) => {
                         if (data.deletedCount > 0) {
                             Swal.fire(
                                 'Deleted!',
-                                'Your file has been deleted.',
+                                'Your coffee has been deleted.',
                                 'success'
                             )
+                            const remaining = coffees.filter(cof => cof._id !== id);
+                            setCoffee(remaining);
                         }
                     })
             }
@@ -70,7 +72,7 @@ const CoffeeCard = ({ coffee }) => {
                             />
                         </svg>
                     </button>
-                    {/* <Link to={`/updateCoffee/${_id}`}>
+                    <Link to={`/updateCoffee/${_id}`}>
             <button className="btn btn-sm btn-circle bg-amber-100 border-none hover:bg-amber-200">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +89,7 @@ const CoffeeCard = ({ coffee }) => {
                 />
               </svg>
             </button>
-          </Link> */}
+          </Link>
                     <button
                         onClick={() => handleDelete(_id)}
                         className="btn btn-sm btn-circle bg-red-500 border-none hover:bg-red-600"
