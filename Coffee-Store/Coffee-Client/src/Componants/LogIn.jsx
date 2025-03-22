@@ -1,24 +1,23 @@
 // LogIn.jsx
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { authContext } from '../Provider/AuthProvider';
 
 const LogIn = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const { loading, setLoading,
+        user, setUser,
+        createUser } = useContext(authContext);
 
-  const handleLogIn = (e) => {
-    e.preventDefault();
-    console.log('Login Data:', formData); // Log the form data
-  };
+    const handleLogIn = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+console.log(email, password);
+      
+    }
+
 
   return (
     <div className="lg:w-3/5 mx-auto">
@@ -39,8 +38,7 @@ const LogIn = () => {
               <input
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+     
                 placeholder="Enter your email"
                 className="input bg-white border-gray-300 rounded-md focus:border-gray-400 focus:ring-0 h-10 text-sm"
                 required
@@ -53,8 +51,7 @@ const LogIn = () => {
               <input
                 type="password"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
+  
                 placeholder="Enter your password"
                 className="input bg-white border-gray-300 rounded-md focus:border-gray-400 focus:ring-0 h-10 text-sm"
                 required
