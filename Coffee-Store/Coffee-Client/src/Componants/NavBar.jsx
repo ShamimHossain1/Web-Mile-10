@@ -20,6 +20,9 @@ const NavBar = () => {
                     <li>
                         <NavLink to="/addcoffee" className={({ isActive }) => isActive ? "text-yellow-400" : ""}>Add Coffee</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/users" className={({ isActive }) => isActive ? "text-yellow-400" : ""}>Users</NavLink>
+                    </li>
                     {user ? (
                         <li>
                             <button onClick={() => setUser(null)} className="bg-red-500 px-3 py-1 rounded">Logout</button>
