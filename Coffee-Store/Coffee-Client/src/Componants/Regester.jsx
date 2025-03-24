@@ -21,7 +21,18 @@ const Register = () => {
                 // const user = result.user;
                 // console.log(user);
                 form.reset();
+                const newUser = { name, email };
                 setLoading(false);
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers:{
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+
+                }).then(res => res.json()).then(data => {
+                    console.log(data);
+                })
             })
             .catch((error) => {
                 console.error(error);
