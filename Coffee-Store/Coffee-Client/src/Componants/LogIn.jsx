@@ -1,13 +1,13 @@
 // LogIn.jsx
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 const LogIn = () => {
     const Navigate = useNavigate();
-    const { loading, setLoading,
-        user, setUser,
-        createUser, loginUser, SignOut } = useContext(authContext);
+    const { setLoading,
+        setUser,
+        loginUser, SignOut } = useContext(authContext);
 
     const handleLogIn = (e) => {
         e.preventDefault();
@@ -21,6 +21,19 @@ const LogIn = () => {
                 // console.log(result.user);
                 setUser(result.user);
                 setLoading(false);
+                const lastSignInTime = result?.user?.metadata?.lastSignInTime;
+                const loginInfo = { email, lastSignInTime };
+                fetch(`http://localhost:5000/users/${email}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loginInfo)
+
+
+                }).then(res => res.json()).then(data => {
+                    console.log(data);
+                })
             }
             )
             .catch((error) => {
@@ -32,7 +45,7 @@ const LogIn = () => {
                     'Login Successful',
 
                 )
-                Navigate('/');
+                // Navigate('/');
             })
 
 

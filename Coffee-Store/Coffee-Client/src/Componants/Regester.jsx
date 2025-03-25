@@ -1,13 +1,13 @@
 // Register.jsx
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { authContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 const Register = () => {
     const Navigate = useNavigate();
 
-    const { loading, setLoading,
-        user, setUser,
+    const {  setLoading,
+       
         createUser } = useContext(authContext);
 
     const handleRegister = (e) => {
