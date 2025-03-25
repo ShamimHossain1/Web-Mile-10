@@ -1,13 +1,13 @@
 // LogIn.jsx
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../Provider/AuthProvider';
-
+import Swal from 'sweetalert2';
 const LogIn = () => {
-
+    const Navigate = useNavigate();
     const { loading, setLoading,
         user, setUser,
-        createUser } = useContext(authContext);
+        createUser, loginUser, SignOut } = useContext(authContext);
 
     const handleLogIn = (e) => {
         e.preventDefault();
@@ -15,6 +15,26 @@ const LogIn = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        loginUser(email, password)
+            .then((result) => {
+                // console.log(result.user);
+                setUser(result.user);
+                setLoading(false);
+            }
+            )
+            .catch((error) => {
+                console.error(error);
+            }).finally(() => {
+                form.reset();
+                Swal.fire(
+
+                    'Login Successful',
+
+                )
+                Navigate('/');
+            })
+
 
     }
 

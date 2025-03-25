@@ -1,9 +1,10 @@
 // Register.jsx
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { authContext } from '../Provider/AuthProvider';
-
+import Swal from 'sweetalert2';
 const Register = () => {
+    const Navigate = useNavigate();
 
     const { loading, setLoading,
         user, setUser,
@@ -25,7 +26,7 @@ const Register = () => {
                 setLoading(false);
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
-                    headers:{
+                    headers: {
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify(newUser)
@@ -33,6 +34,15 @@ const Register = () => {
                 }).then(res => res.json()).then(data => {
                     console.log(data);
                 })
+                Swal.fire(
+                    
+
+                    'User has been registered.',
+                     'success'
+                   
+                )
+                Navigate('/login');
+               
             })
             .catch((error) => {
                 console.error(error);
