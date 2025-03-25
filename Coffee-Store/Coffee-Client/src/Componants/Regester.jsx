@@ -24,7 +24,7 @@ const Register = () => {
                 form.reset();
                 const newUser = { name, email };
                 setLoading(false);
-                fetch('http://localhost:5000/users', {
+                fetch('https://coffee-server-xi-nine.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
