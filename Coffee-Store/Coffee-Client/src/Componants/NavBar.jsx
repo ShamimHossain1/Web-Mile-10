@@ -1,15 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { authContext } from "../Provider/AuthProvider";
 
 const NavBar = () => {
-    const [user, setUser] = useState(null); // Replace with actual authentication logic
 
+    const { user, SignOut, setUser } = useContext(authContext);
+    // console.log(user);
+    const handleSignOut = () => {
+        SignOut().then(() => {
+            setUser(null);
+        });
+    };
     return (
         <nav className="bg-gray-800 text-white p-4">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Left side: Logo / Username */}
                 <div className="text-xl font-bold">
-                    {user ? `Welcome, ${user}` : "Coffee Hub"}
+                    {user ? `Welcome, ${user.email}` : "Coffee Hub"}
                 </div>
 
                 {/* Navigation Links */}
@@ -25,7 +32,7 @@ const NavBar = () => {
                     </li>
                     {user ? (
                         <li>
-                            <button onClick={() => setUser(null)} className="bg-red-500 px-3 py-1 rounded">Logout</button>
+                            <button onClick={() => handleSignOut()} className="bg-red-500 px-3 py-1 rounded">Logout</button>
                         </li>
                     ) : (
                         <>
