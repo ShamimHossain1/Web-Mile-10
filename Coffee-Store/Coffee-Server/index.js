@@ -5,7 +5,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Deploy url Firebase
-// https://fir-auth-9dc31.web.app
+// https://coffee-server-xi-nine.vercel.app/
+
 
 // MiddleWare
 app.use(cors());
