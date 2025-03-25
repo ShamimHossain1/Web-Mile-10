@@ -14,6 +14,10 @@ import Register from './Componants/Regester.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import Users from './Componants/Users.jsx';
 
+// Firebase deploy
+// https://fir-auth-9dc31.firebaseapp.com/
+
+
 const router = createBrowserRouter([
 
   {

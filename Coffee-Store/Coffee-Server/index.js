@@ -4,6 +4,9 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Deploy url Firebase
+// https://fir-auth-9dc31.web.app
+
 // MiddleWare
 app.use(cors());
 app.use(express.json());
