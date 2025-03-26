@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import Swal from 'sweetalert2'
 
@@ -15,29 +16,36 @@ const AddCoffee = () => {
         const photo = e.target.photo.value;
 
         const newCoffee = { name, chef, supplier, taste, category, details, photo }
-        console.log(newCoffee)
+        // console.log(newCoffee);
+
+        // using axios
+
+        axios.post('https://coffee-server-xi-nine.vercel.app/coffee', newCoffee)
+        .then(data =>{
+          console.log(data.data);
+        })
 
         // send data to the server and database
-        fetch('https://coffee-server-xi-nine.vercel.app/coffee', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newCoffee)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    console.log('successfully added');
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Coffee added successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    });
-                    e.target.reset();
-                }
-            })
+        // fetch('https://coffee-server-xi-nine.vercel.app/coffee', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(newCoffee)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.insertedId) {
+        //             console.log('successfully added');
+        //             Swal.fire({
+        //                 title: 'Success!',
+        //                 text: 'Coffee added successfully',
+        //                 icon: 'success',
+        //                 confirmButtonText: 'Ok'
+        //             });
+        //             e.target.reset();
+        //         }
+        //     })
 
     }
 
